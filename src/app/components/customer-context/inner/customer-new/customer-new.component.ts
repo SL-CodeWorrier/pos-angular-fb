@@ -20,6 +20,8 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 export class CustomerNewComponent {
   loading:boolean = false
 
+  selectedAvatar:any;
+
   form = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
@@ -27,6 +29,17 @@ export class CustomerNewComponent {
     avatar: new FormControl('', [Validators.required]),
   })
   saveCustomer() {
+    let customer = {
+      fullName:this.form.value.fullName,
+      address:this.form.value.address,
+      salary:this.form.value.salary,
+      avatar:this.selectedAvatar
+    }
 
+    console.log(customer)
+  }
+
+  onChangeFile(event: any) {
+    this.selectedAvatar = event.target.files[0];
   }
 }
